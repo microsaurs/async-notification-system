@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: async-notification-system
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+notification:
+  async:
+    core-pool-size: 5
+    max-pool-size: 20
+    queue-capacity: 100
+  retry:
+    max-count: 3
+    scheduler-interval-ms: 60000
