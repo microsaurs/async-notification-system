@@ -2,7 +2,9 @@ package com.notification.service;
 
 import com.notification.dto.request.NotificationRequest;
 import com.notification.dto.response.NotificationCreateResponse;
+import com.notification.dto.response.NotificationDetailResponse;
 import com.notification.entity.Notification;
+import com.notification.exception.NotificationNotFoundException;
 import com.notification.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,13 @@ public class NotificationService {
                     notifRepo.save(notif);
                     return NotificationCreateResponse.from(notif);
                 });
+    }
+
+    @Transactional(readOnly = true)
+    public NotificationDetailResponse getDetail(Long id) {
+        Notification notif = notifRepo.findById(id)
+                .orElseThrow(() -> new NotificationNotFoundException(id));
+        return NotificationDetailResponse.from(notif);
     }
 
     private String buildIdempotencyKey(NotificationRequest req) {

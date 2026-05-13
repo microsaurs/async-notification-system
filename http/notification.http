@@ -10,6 +10,12 @@ Content-Type: application/json
   "referenceId": "lecture-456"
 }
 
+### 알림 상태 조회
+GET http://localhost:8080/api/notifications/1
+
+### 존재하지 않는 id 조회 - 404 에러
+GET http://localhost:8080/api/notifications/999
+
 ### 중복 요청 (동일 eventId - 기존 건 반환)
 POST http://localhost:8080/api/notifications
 Content-Type: application/json
