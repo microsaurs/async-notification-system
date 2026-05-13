@@ -25,4 +25,9 @@ public class NotificationScheduler {
         log.info("스케줄러 픽업 건수={}", ids.size());
         ids.forEach(senderService::sendAsync);
     }
+
+    @Scheduled(fixedDelayString = "${notification.retry.recovery-scheduler-interval-ms}")
+    public void recover() {
+        pickUpService.recoverStuck();
+    }
 }

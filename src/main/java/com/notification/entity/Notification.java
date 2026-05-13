@@ -131,7 +131,7 @@ public class Notification {
             this.nextRetryAt = null;
         } else {
             this.status = NotificationStatus.FAILED;
-            this.nextRetryAt = LocalDateTime.now().plusSeconds(30L * retryCount);
+            this.nextRetryAt = LocalDateTime.now().plusSeconds(20L * retryCount);
         }
     }
 
@@ -144,6 +144,6 @@ public class Notification {
     public void recoverStuck() {
         this.status = NotificationStatus.FAILED;
         this.processingStartedAt = null;
-        this.nextRetryAt = LocalDateTime.now().plusSeconds(30L * retryCount);
+        this.nextRetryAt = LocalDateTime.now().plusSeconds(20L * retryCount);
     }
 }

@@ -25,3 +25,5 @@ notification:
   retry:
     max-count: 3
     scheduler-interval-ms: 30000
+    stuck-threshold-minutes: 5
+    recovery-scheduler-interval-ms: 60000
