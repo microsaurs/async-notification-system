@@ -11,6 +11,15 @@
 
 **POST** `/api/notifications`
 
+| 필드 | 필수 | 설명 |
+|---|---|---|
+| recipientId | Y | 수신자 ID |
+| notificationType | Y | 알림 타입 (ENROLLMENT_COMPLETE / PAYMENT_CONFIRMED / LECTURE_START_D1 / CANCEL_PROCESSED) |
+| channel | Y | 발송 채널 (EMAIL / IN_APP) |
+| eventId | Y | 이벤트 식별자. 중복 발송 방지 기준. upstream 서비스에서 생성하여 전달 |
+| referenceId | N | 이벤트 연관 데이터 ID (강의 ID 등) |
+| scheduledAt | N | 예약 발송 시각. null이면 즉시 처리 |
+
 ```json
 // Request
 {
@@ -30,7 +39,7 @@
 }
 ```
 
-> 동일한 이벤트로 중복 요청이 들어올 경우 기존 건을 그대로 반환한다.  
+> 동일한 `eventId`로 중복 요청이 들어올 경우 기존 건을 그대로 반환한다.  
 > `scheduledAt`이 null이면 즉시 처리, 값이 있으면 해당 시각에 발송된다.
 
 ---

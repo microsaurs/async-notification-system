@@ -5,35 +5,35 @@ erDiagram
     NOTIFICATION ||--o{ NOTIFICATION_ATTEMPT : has
 
     NOTIFICATION {
-        BIGINT id PK
-        BIGINT recipient_id
-        VARCHAR notification_type
-        VARCHAR channel
-        VARCHAR event_id
-        VARCHAR reference_id
-        VARCHAR status
-        VARCHAR idempotency_key UK
-        INT retry_count
-        INT max_retry_count
-        DATETIME next_retry_at
-        DATETIME processing_started_at
-        BOOLEAN is_read
-        DATETIME read_at
-        DATETIME scheduled_at
-        DATETIME sent_at
-        DATETIME created_at
-        DATETIME updated_at
+        BIGINT id PK "NOT NULL"
+        BIGINT recipient_id "NOT NULL"
+        VARCHAR notification_type "NOT NULL"
+        VARCHAR channel "NOT NULL"
+        VARCHAR event_id "NOT NULL"
+        VARCHAR reference_id "nullable"
+        VARCHAR status "NOT NULL"
+        VARCHAR idempotency_key UK "NOT NULL"
+        INT retry_count "NOT NULL"
+        INT max_retry_count "NOT NULL"
+        DATETIME next_retry_at "nullable"
+        DATETIME processing_started_at "nullable"
+        BOOLEAN is_read "NOT NULL"
+        DATETIME read_at "nullable"
+        DATETIME scheduled_at "nullable"
+        DATETIME sent_at "nullable"
+        DATETIME created_at "NOT NULL"
+        DATETIME updated_at "NOT NULL"
     }
 
     NOTIFICATION_ATTEMPT {
-        BIGINT id PK
-        BIGINT notification_id FK
-        INT attempt_no
-        VARCHAR status
-        TEXT failure_reason
-        DATETIME started_at
-        DATETIME ended_at
-        DATETIME created_at
+        BIGINT id PK "NOT NULL"
+        BIGINT notification_id FK "NOT NULL"
+        INT attempt_no "NOT NULL"
+        VARCHAR status "NOT NULL"
+        TEXT failure_reason "nullable"
+        DATETIME started_at "NOT NULL"
+        DATETIME ended_at "nullable"
+        DATETIME created_at "NOT NULL"
     }
 ```
 

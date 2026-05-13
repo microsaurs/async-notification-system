@@ -43,8 +43,8 @@ public class Notification {
     @Column(name = "channel", nullable = false, length = 10)
     private NotificationChannel channel;
 
-    // 알림을 발생시킨 이벤트 ID
-    @Column(name = "event_id", length = 100)
+    // 알림을 발생시킨 이벤트 ID (중복 발송 방지 기준)
+    @Column(name = "event_id", nullable = false, length = 100)
     private String eventId;
 
     @Column(name = "reference_id", length = 100)
