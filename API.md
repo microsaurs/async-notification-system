@@ -11,10 +11,10 @@
 
 **POST** `/api/notifications`
 
-| 필드 | 필수 | 설명 |
-|---|---|---|
+| 필드 | &nbsp;필수&nbsp; | 설명 |
+|---|:---:|---|
 | recipientId | Y | 수신자 ID |
-| notificationType | Y | 알림 타입 (ENROLLMENT_COMPLETE / PAYMENT_CONFIRMED / LECTURE_START_D1 / CANCEL_PROCESSED) |
+| notificationType | Y | 알림 타입 |
 | channel | Y | 발송 채널 (EMAIL / IN_APP) |
 | eventId | Y | 이벤트 식별자. 중복 발송 방지 기준. upstream 서비스에서 생성하여 전달 |
 | referenceId | N | 이벤트 연관 데이터 ID (강의 ID 등) |
