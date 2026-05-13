@@ -128,9 +128,10 @@ public class Notification {
         // 재시도 횟수 초과 시 최종 실패
         if (this.retryCount >= this.maxRetryCount) {
             this.status = NotificationStatus.DEAD;
+            this.nextRetryAt = null;
         } else {
             this.status = NotificationStatus.FAILED;
-            this.nextRetryAt = LocalDateTime.now().plusMinutes(5L * retryCount);
+            this.nextRetryAt = LocalDateTime.now().plusSeconds(30L * retryCount);
         }
     }
 
@@ -143,6 +144,6 @@ public class Notification {
     public void recoverStuck() {
         this.status = NotificationStatus.FAILED;
         this.processingStartedAt = null;
-        this.nextRetryAt = LocalDateTime.now().plusMinutes(5L * retryCount);
+        this.nextRetryAt = LocalDateTime.now().plusSeconds(30L * retryCount);
     }
 }

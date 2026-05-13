@@ -6,12 +6,12 @@ Content-Type: application/json
   "recipientId": 1,
   "notificationType": "ENROLLMENT_COMPLETE",
   "channel": "EMAIL",
-  "eventId": "event-123",
-  "referenceId": "lecture-456"
+  "eventId": "event-2",
+  "referenceId": "lecture-2"
 }
 
 ### 알림 상태 조회
-GET http://localhost:8080/api/notifications/1
+GET http://localhost:8080/api/notifications/2
 
 ### 존재하지 않는 id 조회 - 404 에러
 GET http://localhost:8080/api/notifications/999

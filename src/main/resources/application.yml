@@ -24,4 +24,4 @@ notification:
     queue-capacity: 100
   retry:
     max-count: 3
-    scheduler-interval-ms: 60000
+    scheduler-interval-ms: 30000
