@@ -1,0 +1,33 @@
+### 알림 발송 요청 등록
+POST http://localhost:8080/api/notifications
+Content-Type: application/json
+
+{
+  "recipientId": 1,
+  "notificationType": "ENROLLMENT_COMPLETE",
+  "channel": "EMAIL",
+  "eventId": "event-123",
+  "referenceId": "lecture-456"
+}
+
+### 중복 요청 (동일 eventId - 기존 건 반환)
+POST http://localhost:8080/api/notifications
+Content-Type: application/json
+
+{
+  "recipientId": 1,
+  "notificationType": "ENROLLMENT_COMPLETE",
+  "channel": "EMAIL",
+  "eventId": "event-123",
+  "referenceId": "lecture-456"
+}
+
+### eventId 누락 - 400 에러
+POST http://localhost:8080/api/notifications
+Content-Type: application/json
+
+{
+  "recipientId": 1,
+  "notificationType": "ENROLLMENT_COMPLETE",
+  "channel": "EMAIL"
+}
