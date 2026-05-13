@@ -81,11 +81,12 @@
 
 ---
 
-## 읽음 처리
+## 읽음 처리 (IN_APP)
 
 **PATCH** `/api/notifications/{id}/read`
 
-> IN_APP 채널 알림만 가능
+> IN_APP 채널 알림만 가능.  
+> EMAIL 채널은 트래킹 픽셀 방식으로 별도 처리 (README 참고).
 
 ```json
 // Response 200
@@ -93,5 +94,10 @@
   "id": 1,
   "isRead": true,
   "readAt": "2026-05-12T10:05:00"
+}
+
+// Response 400 - EMAIL 채널 알림에 요청한 경우
+{
+  "error": "EMAIL 채널 알림은 이 엔드포인트로 읽음 처리할 수 없습니다."
 }
 ```
