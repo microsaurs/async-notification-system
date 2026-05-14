@@ -46,3 +46,9 @@ GET http://localhost:8080/api/notifications?recipientId=1&isRead=false
 
 ### 알림 목록 조회 (읽음 필터)
 GET http://localhost:8080/api/notifications?recipientId=1&isRead=true
+
+### 수동 재시도 (DEAD 상태 알림)
+POST http://localhost:8080/api/notifications/2/retry
+
+### 수동 재시도 - DEAD 아닌 상태 - 400 에러
+POST http://localhost:8080/api/notifications/1/retry

@@ -38,4 +38,10 @@ public class NotificationController {
     public ResponseEntity<NotificationDetailResponse> getDetail(@PathVariable Long id) {
         return ResponseEntity.ok(notifService.getDetail(id));
     }
+
+    @PostMapping("/{id}/retry")
+    public ResponseEntity<Void> retry(@PathVariable Long id) {
+        notifService.retry(id);
+        return ResponseEntity.ok().build();
+    }
 }

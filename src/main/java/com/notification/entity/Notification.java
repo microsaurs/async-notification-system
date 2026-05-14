@@ -135,6 +135,13 @@ public class Notification {
         }
     }
 
+    public void resetForRetry() {
+        this.status = NotificationStatus.PENDING;
+        this.retryCount = 0;
+        this.nextRetryAt = null;
+        this.processingStartedAt = null;
+    }
+
     public void markRead() {
         this.isRead = true;
         this.readAt = LocalDateTime.now();

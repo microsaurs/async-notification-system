@@ -5,6 +5,8 @@ import com.notification.dto.response.NotificationCreateResponse;
 import com.notification.dto.response.NotificationDetailResponse;
 import com.notification.dto.response.NotificationListResponse;
 import com.notification.entity.Notification;
+import com.notification.enums.NotificationStatus;
+import com.notification.exception.InvalidNotificationStatusException;
 import com.notification.exception.NotificationNotFoundException;
 import com.notification.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,6 +62,16 @@ public class NotificationService {
         Notification notif = notifRepo.findById(id)
                 .orElseThrow(() -> new NotificationNotFoundException(id));
         return NotificationDetailResponse.from(notif);
+    }
+
+    @Transactional
+    public void retry(Long id) {
+        Notification notif = notifRepo.findById(id)
+                .orElseThrow(() -> new NotificationNotFoundException(id));
+        if (notif.getStatus() != NotificationStatus.DEAD) {
+            throw new InvalidNotificationStatusException("수동 재시도는 DEAD 상태인 알림만 가능합니다.");
+        }
+        notif.resetForRetry();
     }
 
     private String buildIdempotencyKey(NotificationRequest req) {
