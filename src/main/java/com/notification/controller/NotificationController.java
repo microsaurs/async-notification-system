@@ -44,4 +44,10 @@ public class NotificationController {
         notifService.retry(id);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/{id}/read")
+    public ResponseEntity<Void> markAsRead(@PathVariable Long id) {
+        notifService.markAsRead(id);
+        return ResponseEntity.ok().build();
+    }
 }

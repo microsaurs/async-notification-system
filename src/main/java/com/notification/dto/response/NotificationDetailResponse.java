@@ -15,6 +15,8 @@ public record NotificationDetailResponse(
         NotificationStatus status,
         int retryCount,
         LocalDateTime nextRetryAt,
+        boolean isRead,
+        LocalDateTime readAt,
         LocalDateTime sentAt,
         LocalDateTime createdAt
 ) {
@@ -27,6 +29,8 @@ public record NotificationDetailResponse(
                 notification.getStatus(),
                 notification.getRetryCount(),
                 notification.getNextRetryAt(),
+                notification.isRead(),
+                notification.getReadAt(),
                 notification.getSentAt(),
                 notification.getCreatedAt()
         );

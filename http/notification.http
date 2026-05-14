@@ -3,15 +3,15 @@ POST http://localhost:8080/api/notifications
 Content-Type: application/json
 
 {
-  "recipientId": 5,
-  "notificationType": "CANCEL_PROCESSED",
+  "recipientId": 8,
+  "notificationType": "ENROLLMENT_COMPLETE",
   "channel": "IN_APP",
-  "eventId": "event-5",
-  "referenceId": "lecture-1"
+  "eventId": "event-6",
+  "referenceId": "lecture-3"
 }
 
 ### 알림 상태 조회
-GET http://localhost:8080/api/notifications/2
+GET http://localhost:8080/api/notifications/5
 
 ### 존재하지 않는 id 조회 - 404 에러
 GET http://localhost:8080/api/notifications/999
@@ -52,3 +52,12 @@ POST http://localhost:8080/api/notifications/2/retry
 
 ### 수동 재시도 - DEAD 아닌 상태 - 400 에러
 POST http://localhost:8080/api/notifications/1/retry
+
+### 읽음 처리 (IN_APP 채널 + SENT 상태)
+PATCH http://localhost:8080/api/notifications/6/read
+
+### 읽음 처리 - EMAIL 채널 - 400 에러
+PATCH http://localhost:8080/api/notifications/1/read
+
+### 읽음 처리 - 존재하지 않는 id - 404 에러
+PATCH http://localhost:8080/api/notifications/999/read
