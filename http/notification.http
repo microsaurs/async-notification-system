@@ -61,3 +61,16 @@ PATCH http://localhost:8080/api/notifications/1/read
 
 ### 읽음 처리 - 존재하지 않는 id - 404 에러
 PATCH http://localhost:8080/api/notifications/999/read
+
+### 예약 발송 (1분 후 발송)
+POST http://localhost:8080/api/notifications
+Content-Type: application/json
+
+{
+  "recipientId": 1,
+  "notificationType": "LECTURE_START_D1",
+  "channel": "EMAIL",
+  "eventId": "event-scheduled-1",
+  "referenceId": "lecture-10",
+  "scheduledAt": "2026-05-14T16:26:00"
+}
