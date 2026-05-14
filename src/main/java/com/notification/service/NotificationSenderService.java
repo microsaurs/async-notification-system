@@ -49,12 +49,34 @@ public class NotificationSenderService {
     }
 
     private void sendEmail(Notification notif) {
-        log.info("[EMAIL] recipientId={} type={}", notif.getRecipientId(), notif.getNotificationType());
+        String subject = resolveSubject(notif);
+        String body = resolveBody(notif);
+        log.info("[EMAIL 발송] 수신자: {} | 제목: {} | 내용: {}", notif.getRecipientId(), subject, body);
         // TODO: 재시도 흐름 테스트용 임시 예외
         // throw new RuntimeException("EMAIL 발송 실패 (테스트)");
     }
 
     private void sendInApp(Notification notif) {
-        log.info("[IN_APP] recipientId={} type={}", notif.getRecipientId(), notif.getNotificationType());
+        String message = resolveSubject(notif);
+        log.info("[IN_APP 발송] 수신자: {} | 메시지: {}", notif.getRecipientId(), message);
+    }
+
+    private String resolveSubject(Notification notif) {
+        return switch (notif.getNotificationType()) {
+            case ENROLLMENT_COMPLETE -> "수강 신청이 완료되었습니다";
+            case PAYMENT_CONFIRMED   -> "결제가 확정되었습니다";
+            case LECTURE_START_D1   -> "강의 시작 하루 전입니다";
+            case CANCEL_PROCESSED   -> "취소 처리가 완료되었습니다";
+        };
+    }
+
+    private String resolveBody(Notification notif) {
+        String ref = notif.getReferenceId() != null ? notif.getReferenceId() : "-";
+        return switch (notif.getNotificationType()) {
+            case ENROLLMENT_COMPLETE -> ref + " 강의 수강 신청이 완료되었습니다.";
+            case PAYMENT_CONFIRMED   -> ref + " 결제가 정상적으로 확정되었습니다.";
+            case LECTURE_START_D1   -> ref + " 강의가 내일 시작됩니다. 준비해주세요.";
+            case CANCEL_PROCESSED   -> ref + " 취소 처리가 완료되었습니다.";
+        };
     }
 }

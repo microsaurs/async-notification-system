@@ -3,11 +3,11 @@ POST http://localhost:8080/api/notifications
 Content-Type: application/json
 
 {
-  "recipientId": 1,
-  "notificationType": "ENROLLMENT_COMPLETE",
-  "channel": "EMAIL",
-  "eventId": "event-2",
-  "referenceId": "lecture-2"
+  "recipientId": 5,
+  "notificationType": "CANCEL_PROCESSED",
+  "channel": "IN_APP",
+  "eventId": "event-5",
+  "referenceId": "lecture-1"
 }
 
 ### 알림 상태 조회
